@@ -29,7 +29,7 @@ Only work original plugin.
 
 ### Web Access
 
-If you set API token to `g:codic_token`, use codic web service access.
+If you set API token to `g:codicweb_token`, use codic web service access.
 
 Need `curl`, `wget`, or work `Python`.
 
