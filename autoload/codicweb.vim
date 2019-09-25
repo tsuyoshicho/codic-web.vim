@@ -1,16 +1,17 @@
 " vim:set sts=2 sw=2 tw=0 et:
 "
-" codic.vim - codic autoload file.
+" codic-web
+" forked from codic.vim - codic plugin.
 
 scriptencoding utf-8
 
 let s:saved_cpo = &cpo
 set cpo-=C
 
-let s:HTTP = vital#codic#import('Web.HTTP')
-let s:JSON = vital#codic#import('Web.JSON')
+let s:HTTP = vital#codicweb#import('Web.HTTP')
+let s:JSON = vital#codicweb#import('Web.JSON')
 
-function! codic#command(...)
+function! codicweb#command(...)
   if a:0 == 0
     call s:Search(expand('<cword>'))
   else
@@ -18,7 +19,7 @@ function! codic#command(...)
   end
 endfunction
 
-function! codic#clear()
+function! codicweb#clear()
   if exists('s:dict_naming')
     unlet s:dict_naming
   endif
@@ -27,8 +28,8 @@ function! codic#clear()
   endif
 endfunction
 
-function! codic#complete(arglead, cmdline, curpos)
-  let r = codic#search(a:arglead, 50)
+function! codicweb#complete(arglead, cmdline, curpos)
+  let r = codicweb#search(a:arglead, 50)
   if type(r) == 0
     return []
   endif
@@ -38,7 +39,7 @@ endfunction
 " search from codic.
 "   word  - keyword to search
 "   limit - limit number of candidates (0:unlimitted)
-function! codic#search(word, limit)
+function! codicweb#search(word, limit)
   if len(a:word) == 0
     return -1
   endif
@@ -57,7 +58,7 @@ function! s:EchoError(msg)
 endfunction
 
 function! s:Search(word)
-  let r = codic#search(a:word, 10)
+  let r = codicweb#search(a:word, 10)
   if type(r) == 0
     if r == -1
       call s:EchoError('Codic: empty word')
