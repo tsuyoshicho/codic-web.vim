@@ -1,8 +1,8 @@
 # codic-web vim plugin
 
-A plugin of http://codic.jp/ API or "Inbox Codic dictionary" programming  for Vim.
+A plugin of http://codic.jp/ programming naming search for Vim; That use API or "Inbox Codic dictionary".
 
-Forked from [koron/codic\-vim: Codic vim plugin](https://github.com/koron/codic-vim)
+Forked from [koron/codic\-vim: Codic vim plugin](https://github.com/koron/codic-vim).
 
 ## Usage
 
@@ -23,7 +23,7 @@ preview window.
 
 ### Unite Source
 
-Only work original plugin.
+Only work unite source for original plugin.
 
 ## Dictionaries
 
