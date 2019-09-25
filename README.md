@@ -1,28 +1,29 @@
-# codic vim plugin
+# codic-web vim plugin
 
-A plugin of http://codic.jp/ for Vim.
+A plugin of http://codic.jp/ API or "Inbox Codic dictionary" programming  for Vim.
+
+Forked from [koron/codic\-vim: Codic vim plugin](https://github.com/koron/codic-vim)
 
 ## Usage
 
-To search a word of under ther cursor.
+To search a word of under their cursor.
 
 ```
-:Codic
+:CodicWeb
 ```
 
 Or give a word as an argument.
 
 ```
-:Codic ベクター
+:CodicWeb ベクター
 ```
 
-To close codic result window, just type `<C-W><C-Z>` or `<C-W>z`.  It is a just
+To close "codic" result window, just type `<C-W><C-Z>` or `<C-W>z`.  It is a just
 preview window.
 
 ### Unite Source
 
-If you want to use codic-vim as Unite source, please refer
-[unite-codic.vim](https://github.com/rhysd/unite-codic.vim) project.
+Only work original plugin.
 
 ## Dictionaries
 
@@ -34,20 +35,13 @@ Need `curl`, `wget`, or work `Python`.
 
 ### Local Dictionaries
 
-For latest dictionaries, download archive files from
-http://codic.jp/assets/archives/
-
-*   codic-english-dict-{YYYYMMDD}.zip
-*   codic-naming-dict-{YYYYMMDD}.zip
-
-then extract \*.csv files and overwrite in dict/ folder.
-
-Currently, dict/ folder includes dictionaries 20140413 version.
+If do not set token, use inbox dictionary.
 
 ## Special Thanks
 
-*   [Linda\_pp](http://rhysd.hatenablog.com/entry/2014/01/04/152927)
-*   [osyo-manga](http://d.hatena.ne.jp/osyo-manga/20140104/1388844035)
+* [koron at codic\-vim](https://github.com/koron/codic-vim)
+* [Linda\_pp](http://rhysd.hatenablog.com/entry/2014/01/04/152927)
+* [osyo-manga](http://d.hatena.ne.jp/osyo-manga/20140104/1388844035)
 
 ## License
 
