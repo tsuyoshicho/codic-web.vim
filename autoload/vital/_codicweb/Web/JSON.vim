@@ -4,7 +4,7 @@
 function! s:_SID() abort
   return matchstr(expand('<sfile>'), '<SNR>\zs\d\+\ze__SID$')
 endfunction
-execute join(['function! vital#_codic#Web#JSON#import() abort', printf("return map({'decode': '', '_vital_depends': '', '_vital_created': '', 'encode': '', '_vital_loaded': ''}, \"vital#_codic#function('<SNR>%s_' . v:key)\")", s:_SID()), 'endfunction'], "\n")
+execute join(['function! vital#_codicweb#Web#JSON#import() abort', printf("return map({'decode': '', '_vital_depends': '', '_vital_created': '', 'encode': '', '_vital_loaded': ''}, \"vital#_codicweb#function('<SNR>%s_' . v:key)\")", s:_SID()), 'endfunction'], "\n")
 delfunction s:_SID
 " ___vital___
 let s:save_cpo = &cpo
