@@ -1,16 +1,17 @@
 " vim:set sts=2 sw=2 tw=0 et:
 "
-" codic.vim - codic autoload file.
+" codic-web
+" forked from codic.vim - codic plugin.
 
 scriptencoding utf-8
 
 let s:saved_cpo = &cpo
 set cpo-=C
 
-let s:HTTP = vital#codic#import('Web.HTTP')
-let s:JSON = vital#codic#import('Web.JSON')
+let s:HTTP = vital#codicweb#import('Web.HTTP')
+let s:JSON = vital#codicweb#import('Web.JSON')
 
-function! codic#command(...)
+function! codicweb#command(...)
   if a:0 == 0
     call s:Search(expand('<cword>'))
   else
@@ -18,7 +19,7 @@ function! codic#command(...)
   end
 endfunction
 
-function! codic#clear()
+function! codicweb#clear()
   if exists('s:dict_naming')
     unlet s:dict_naming
   endif
@@ -27,8 +28,8 @@ function! codic#clear()
   endif
 endfunction
 
-function! codic#complete(arglead, cmdline, curpos)
-  let r = codic#search(a:arglead, 50)
+function! codicweb#complete(arglead, cmdline, curpos)
+  let r = codicweb#search(a:arglead, 50)
   if type(r) == 0
     return []
   endif
@@ -38,11 +39,11 @@ endfunction
 " search from codic.
 "   word  - keyword to search
 "   limit - limit number of candidates (0:unlimitted)
-function! codic#search(word, limit)
+function! codicweb#search(word, limit)
   if len(a:word) == 0
     return -1
   endif
-  if exists('g:codic_token')
+  if exists('g:codicweb_token')
     let items = s:GetDictWebAuto(a:word, a:limit)
   else
     let items = s:GetDictAuto(a:word, a:limit)
@@ -57,23 +58,23 @@ function! s:EchoError(msg)
 endfunction
 
 function! s:Search(word)
-  let r = codic#search(a:word, 10)
+  let r = codicweb#search(a:word, 10)
   if type(r) == 0
     if r == -1
-      call s:EchoError('Codic: empty word')
+      call s:EchoError('CodicWeb: empty word')
     elseif r == -2
-      call s:EchoError('Codic: dictionaries not found')
+      call s:EchoError('CodicWeb: dictionaries not found')
     elseif r == -3
-      call s:EchoError(printf('Codic: cannot find for "%s"', a:word))
+      call s:EchoError(printf('CodicWeb: cannot find for "%s"', a:word))
     else
-      call s:EchoError(printf('Codic: unknown error %d', r))
+      call s:EchoError(printf('CodicWeb: unknown error %d', r))
     endif
     return r
   endif
   let bnum = s:Show(r, a:word)
   if bnum < 0
     echohl ErrorMsg
-    echomsg 'Codic: failed to open buffer'
+    echomsg 'CodicWeb: failed to open buffer'
     echohl None
     return -4
   endif
@@ -112,7 +113,7 @@ endfunction
 
 function! s:LoadDict(dir, name, mapfn)
   echohl WarningMsg
-  echomsg printf('Codic: loading dict:%s (first time only)', a:name)
+  echomsg printf('CodicWeb: loading dict:%s (first time only)', a:name)
   echohl None
   let entry = s:LoadCSV(globpath(a:dir, a:name . '-entry.csv'))
   let data = s:ToMap(s:LoadCSV(globpath(a:dir, a:name . '-translation.csv')))
@@ -160,7 +161,7 @@ endfunction
 
 function! s:GetDict(lang)
     if ! exists('s:dict_' . a:lang)
-      let dictdir = g:codic_dictdir
+      let dictdir = g:codicweb_dictdir
       let Mapfn = function('s:Map_' . a:lang)
       let s:dict_{a:lang} = s:LoadDict(dictdir, a:lang, Mapfn)
     endif
@@ -248,7 +249,7 @@ function! s:GetDictWebCEDLookup(word, limit)
         \}
   let res = s:HTTP.request('GET', url, {
         \ 'param'      : param,
-        \ 'token'      : g:codic_token,
+        \ 'token'      : g:codicweb_token,
         \ 'authMethod' : 'oauth2',
         \})
   let dict = []
@@ -273,7 +274,7 @@ function! s:GetDictWebEngine(word, limit)
         \}
   let res = s:HTTP.request('GET', url, {
         \ 'param'      : param,
-        \ 'token'      : g:codic_token,
+        \ 'token'      : g:codicweb_token,
         \ 'authMethod' : 'oauth2',
         \})
   let dict = []
