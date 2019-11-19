@@ -248,9 +248,9 @@ function! s:GetDictWebCEDLookup(word, limit)
         \ 'count' : limit,
         \}
   let res = s:HTTP.request('GET', url, {
-        \ 'param'      : param,
-        \ 'token'      : g:codicweb_token,
-        \ 'authMethod' : 'oauth2',
+        \ 'param'       : param,
+        \ 'bearerToken' : g:codicweb_token,
+        \ 'authMethod'  : 'oauth2',
         \})
   let dict = []
   if res.success
@@ -273,9 +273,9 @@ function! s:GetDictWebEngine(word, limit)
         \ 'text' : a:word,
         \}
   let res = s:HTTP.request('GET', url, {
-        \ 'param'      : param,
-        \ 'token'      : g:codicweb_token,
-        \ 'authMethod' : 'oauth2',
+        \ 'param'       : param,
+        \ 'bearerToken' : g:codicweb_token,
+        \ 'authMethod'  : 'oauth2',
         \})
   let dict = []
   if res.success
